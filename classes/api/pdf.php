@@ -24,6 +24,10 @@
 
 namespace local_dompdf\api;
 
+use Dompdf\Dompdf;
+use invalid_dataroot_permissions;
+use coding_exception;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -44,11 +48,26 @@ abstract class pdf {
 
     /**
      * Create new instance
-     * @return \Dompdf\Dompdf
+     * @param array|null $options
+     * @return Dompdf
+     * @throws invalid_dataroot_permissions
+     * @throws coding_exception
      */
-    public static function createnew() {
+    public static function createnew(array $options = null) {
         self::autoload();
-        return new \Dompdf\Dompdf();
+        $cachedir = make_localcache_directory('dompdf');
+        $default = [
+            'temp_dir' => $cachedir,
+            'font_cache' => $cachedir,
+            'default_paper_size' => 'A4',
+            'default_paper_orientation' => 'portrait',
+            'is_php_enabled' => false
+        ];
+        $opts = $default;
+        if (is_array($options)) {
+            $opts = array_merge($default, $options);
+        }
+        return new \Dompdf\Dompdf($opts);
     }
 
 }
