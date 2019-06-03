@@ -12,6 +12,8 @@ variables:
   DBNAME: "moodle"
   # Change this in case you need a different moodle fork
   MOODLE_REPO: "https://github.com/moodle/moodle.git"
+  IGNORE_PATHS: "vendor/composer"
+  IGNORE_NAMES: "autoload.php"
 
 .build_template: &build_definition
   before_script:
