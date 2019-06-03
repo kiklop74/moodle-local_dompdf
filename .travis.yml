@@ -1,14 +1,7 @@
-dist: xenial
 
 sudo: true
 
 language: php
-
-addons:
-  apt:
-    packages:
-      - openjdk-8-jre-headless
-      - chromium-chromedriver
 
 cache:
   directories:
@@ -27,11 +20,11 @@ env:
 
 matrix:
  include:
-  - php: "5.4"
+  - php: "5.6"
     env: MOODLE_BRANCH=MOODLE_29_STABLE
-  - php: "5.4"
+  - php: "5.6"
     env: MOODLE_BRANCH=MOODLE_30_STABLE
-  - php: "5.4"
+  - php: "5.6"
     env: MOODLE_BRANCH=MOODLE_31_STABLE
   - php: "5.6"
     env: MOODLE_BRANCH=MOODLE_32_STABLE MOODLE_CI_VER=2
@@ -41,7 +34,6 @@ matrix:
     env: MOODLE_BRANCH=MOODLE_34_STABLE MOODLE_CI_VER=2
 
 before_install:
-  - phpenv config-rm xdebug.ini
   - nvm install 8.9
   - nvm use 8.9
   - cd ../..
@@ -60,12 +52,4 @@ script:
   - moodle-plugin-ci phpmd
   - moodle-plugin-ci codechecker
   - moodle-plugin-ci validate
-  - if [ "$MOODLE_CI_VER" -eq 1 ] ; then moodle-plugin-ci csslint    ; fi
-  - if [ "$MOODLE_CI_VER" -eq 1 ] ; then moodle-plugin-ci shifter    ; fi
-  - if [ "$MOODLE_CI_VER" -eq 1 ] ; then moodle-plugin-ci jshint     ; fi
   - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci savepoints ; fi
-  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci mustache   ; fi
-  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci grunt      ; fi
-  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci phpdoc     ; fi
-  - moodle-plugin-ci phpunit
-  - moodle-plugin-ci behat
