@@ -4,9 +4,16 @@ sudo: true
 
 language: php
 
+addons:
+  apt:
+    packages:
+      - openjdk-8-jre-headless
+      - chromium-chromedriver
+
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.npm
 
 services:
   - mysql
@@ -35,6 +42,8 @@ matrix:
 
 before_install:
   - phpenv config-rm xdebug.ini
+  - nvm install 8.9
+  - nvm use 8.9
   - cd ../..
   - composer selfupdate
   - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^${MOODLE_CI_VER}
