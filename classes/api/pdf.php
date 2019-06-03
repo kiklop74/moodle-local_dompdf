@@ -42,4 +42,13 @@ abstract class pdf {
         require_once(__DIR__.'/../../vendor/autoload.php');
     }
 
+    /**
+     * Create new instance
+     * @return \Dompdf\Dompdf
+     */
+    public static function createnew() {
+        self::autoload();
+        return new \Dompdf\Dompdf();
+    }
+
 }
