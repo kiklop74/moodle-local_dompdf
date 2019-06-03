@@ -1,0 +1,60 @@
+dist: precise
+
+sudo: true
+
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+services:
+  - mysql
+
+env:
+  global:
+    - DB=mysqli
+    - MOODLE_CI_VER=1
+
+matrix:
+ include:
+  - php: 5.4
+    env: MOODLE_BRANCH=MOODLE_29_STABLE
+  - php: 5.4
+    env: MOODLE_BRANCH=MOODLE_30_STABLE
+  - php: 5.4
+    env: MOODLE_BRANCH=MOODLE_31_STABLE
+  - php: 5.6
+    env: MOODLE_BRANCH=MOODLE_32_STABLE MOODLE_CI_VER=2
+  - php: 7.0
+    env: MOODLE_BRANCH=MOODLE_33_STABLE MOODLE_CI_VER=2
+  - php: 7.0
+    env: MOODLE_BRANCH=MOODLE_34_STABLE MOODLE_CI_VER=2
+
+before_install:
+  - phpenv config-rm xdebug.ini
+  - cd ../..
+  - composer selfupdate
+  - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^${MOODLE_CI_VER}
+  - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
+
+install:
+  - moodle-plugin-ci install
+
+# We do not include behat testing for now since there are numerous issues
+# with the tests them selves that need to be resolved before doing that.
+script:
+  - moodle-plugin-ci phplint
+  - moodle-plugin-ci phpcpd
+  - moodle-plugin-ci phpmd
+  - moodle-plugin-ci codechecker
+  - moodle-plugin-ci validate
+  - if [ "$MOODLE_CI_VER" -eq 1 ] ; then moodle-plugin-ci csslint    ; fi
+  - if [ "$MOODLE_CI_VER" -eq 1 ] ; then moodle-plugin-ci shifter    ; fi
+  - if [ "$MOODLE_CI_VER" -eq 1 ] ; then moodle-plugin-ci jshint     ; fi
+  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci savepoints ; fi
+  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci mustache   ; fi
+  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci grunt      ; fi
+  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci phpdoc     ; fi
+  - moodle-plugin-ci phpunit
+  - moodle-plugin-ci behat
