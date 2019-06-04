@@ -54,15 +54,24 @@ abstract class pdf {
      * @throws coding_exception
      */
     public static function createnew(array $options = null) {
+        global $CFG;
         self::autoload();
         $cachedir = make_localcache_directory('dompdf');
         $default = [
             'temp_dir' => $cachedir,
             'font_cache' => $cachedir,
+            'log_output_file' => sprintf('%s/log.html', $cachedir),
             'default_paper_size' => 'A4',
             'default_paper_orientation' => 'portrait',
+            'is_html5_parser_enabled' => true,
             'is_php_enabled' => false
         ];
+        if ($CFG->debugdeveloper === DEBUG_DEVELOPER) {
+            $default['debug_png'] = true;
+            $default['debug_keep_temp'] = true;
+            $default['debug_css'] = true;
+            $default['debug_layout'] = true;
+        }
         $opts = $default;
         if (is_array($options)) {
             $opts = array_merge($default, $options);
