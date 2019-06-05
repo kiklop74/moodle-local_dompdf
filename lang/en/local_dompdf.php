@@ -26,8 +26,3 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Dompdf library';
 $string['privacy:metadata'] = 'This plugin provides a dompdf library and does not operate in any way on user information';
-$string['domrequired'] = 'PHP DOM extension is required and must be present';
-$string['mbstringrequired'] = 'PHP Mbstring extension is required and must be present';
-$string['gdrequired'] = 'PHP GD extension is required and must be present';
-$string['imagickrecommended'] = 'PHP Imagick extension is optional and is recommended';
-$string['gmagickrecommended'] = 'PHP Gmagick extension is optional and is recommended';

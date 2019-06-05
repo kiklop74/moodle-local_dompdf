@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <COMPATIBILITY_MATRIX>
     <PLUGIN name="local_dompdf">
+        <PHP version="5.4.0" level="required" />
         <PHP_EXTENSIONS>
-            <PHP_EXTENSION name="dom" level="required">
-                <FEEDBACK>
-                    <ON_ERROR message="domrequired" />
-                </FEEDBACK>
-            </PHP_EXTENSION>
-            <PHP_EXTENSION name="mbstring" level="required">
-                <FEEDBACK>
-                    <ON_ERROR message="mbstringrequired" />
-                </FEEDBACK>
-            </PHP_EXTENSION>
-            <PHP_EXTENSION name="gd" level="required">
-                <FEEDBACK>
-                    <ON_ERROR message="mbstringrequired" />
-                </FEEDBACK>
-            </PHP_EXTENSION>
-            <PHP_EXTENSION name="imagick" level="optional">
-                <FEEDBACK>
-                    <ON_CHECK message="imagickrecommended" />
-                </FEEDBACK>
-            </PHP_EXTENSION>
-            <PHP_EXTENSION name="gmagick" level="optional">
-                <FEEDBACK>
-                    <ON_CHECK message="gmagickrecommended" />
-                </FEEDBACK>
-            </PHP_EXTENSION>
+            <PHP_EXTENSION name="dom" level="required" />
+            <PHP_EXTENSION name="mbstring" level="required" />
+            <PHP_EXTENSION name="gd" level="required" />
+            <PHP_EXTENSION name="imagick" level="optional" />
+            <PHP_EXTENSION name="gmagick" level="optional" />
         </PHP_EXTENSIONS>
     </PLUGIN>
 </COMPATIBILITY_MATRIX>
