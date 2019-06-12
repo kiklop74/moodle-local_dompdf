@@ -81,7 +81,7 @@ abstract class xmlutil {
             $doc->strictErrorChecking = false;
             $doc->recover = true;
             $doc->validateOnParse = false;
-            $options = LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING;
+            $options = LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NONET;
             $decoded = $decode ? html_entity_decode($htmlfragment, ENT_QUOTES, self::UTF8) : $htmlfragment;
             $wraphtml = "<html lang='en'>
                         <head>
