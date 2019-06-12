@@ -92,7 +92,7 @@ abstract class xmlutil {
                           $decoded
                         </body>
                         </html>";
-            if ($doc->loadHTML($wraphtml, $options)) {
+            if (@$doc->loadHTML($wraphtml, $options)) {
                 $result = $doc;
             }
         }
@@ -129,7 +129,11 @@ abstract class xmlutil {
      */
     public static function recode_images($html, $itemid, $filearea, $contextid, $component) {
         $result = $html;
-        $xpath = new DOMXPath(self::loadhtmlfragment($html, false));
+        $doc = self::loadhtmlfragment($html, false);
+        if ($doc === null) {
+            return $result;
+        }
+        $xpath = new DOMXPath($doc);
         $seed = '@@PLUGINFILE@@'; $empty = ''; $srcattribute = 'src';
         $items = $xpath->query(sprintf('//img[@%1$s and starts-with(@%1$s, "%2$s/")]', $srcattribute, $seed));
         if ($items->length > 0) {
