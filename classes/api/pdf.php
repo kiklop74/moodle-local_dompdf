@@ -27,6 +27,7 @@ namespace local_dompdf\api;
 use Dompdf\Dompdf;
 use invalid_dataroot_permissions;
 use coding_exception;
+use file_exception;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -77,6 +78,21 @@ abstract class pdf {
             $opts = array_merge($default, $options);
         }
         return new \Dompdf\Dompdf($opts);
+    }
+
+    /**
+     * Converts images in the form acceptable to the library
+     * @param string $html
+     * @param int $itemid
+     * @param string $filearea
+     * @param int $contextid
+     * @param string $component
+     * @return string
+     * @throws file_exception
+     * @throws coding_exception
+     */
+    public static function file_rewrite_image_urls($html, $itemid, $filearea, $contextid, $component) {
+        return xmlutil::recode_images($html, $itemid, $filearea, $contextid, $component);
     }
 
 }
