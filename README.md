@@ -26,3 +26,17 @@ https://github.com/dompdf/dompdf/wiki/Requirements
 
 By default whenever a PDF is generated systems uses $CFG->localcachedir/dompdf to store temporary data.
 
+### Usage
+
+To create new instance of the PDF class use following code:
+
+    $pdf = \local_dompdf\api\pdf::createnew();
+
+This gives you an instance of `\Dompdf\Dompdf` class and you just use it as outlined in the 
+official [library documentation](https://github.com/dompdf/dompdf/wiki).
+
+### Examples
+
+Examples are located in examples directory of the plugin.
+
+
