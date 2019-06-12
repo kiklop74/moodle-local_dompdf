@@ -24,7 +24,7 @@ https://github.com/dompdf/dompdf/wiki/Requirements
 
 ### Internal settings
 
-By default whenever a PDF is generated systems uses $CFG->localcachedir/dompdf to store temporary data.
+By default whenever a PDF is generated systems uses `$CFG->localcachedir/dompdf` to store temporary data.
 
 ### Usage
 
