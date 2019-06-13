@@ -61,7 +61,8 @@ if ($form->is_submitted()) {
         $processimages = \local_dompdf\api\pdf::file_rewrite_image_urls(
             $postdata->message, $postdata->id, 'post', $context->id, 'mod_forum'
         );
-        $html = format_text($processimages, $postdata->messageformat, $options);
+        $body = format_text($processimages, $postdata->messageformat, $options);
+        $html = sprintf('<h1>%s</h1>%s', format_string($postdata->subject), $body);
         $pdf = \local_dompdf\api\pdf::createnew();
         $pdf->loadHtml($html);
         $pdf->render();
