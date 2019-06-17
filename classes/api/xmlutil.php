@@ -81,18 +81,17 @@ abstract class xmlutil {
             $doc->strictErrorChecking = false;
             $doc->recover = true;
             $doc->validateOnParse = false;
-            $options = LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NONET;
             $decoded = $decode ? html_entity_decode($htmlfragment, ENT_QUOTES, self::UTF8) : $htmlfragment;
-            $wraphtml = "<html lang='en'>
+            $wraphtml = sprintf('<html lang="en">
                         <head>
-                          <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+                          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                           <title>title</title>
                         </head>
                         <body>
-                          $decoded
+                          %s
                         </body>
-                        </html>";
-            if (@$doc->loadHTML($wraphtml, $options)) {
+                        </html>', $decoded);
+            if (@$doc->loadHTML($wraphtml, LIBXML_NONET)) {
                 $result = $doc;
             }
         }
