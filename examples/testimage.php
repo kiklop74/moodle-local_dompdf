@@ -23,6 +23,7 @@
  */
 
 require(__DIR__ . '/../../../config.php');
+global $CFG, $DB, $PAGE, $OUTPUT;
 require_once($CFG->libdir . '/filelib.php');
 require_once($CFG->dirroot . '/local/dompdf/examples/postform.php');
 

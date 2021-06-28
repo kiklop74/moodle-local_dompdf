@@ -24,6 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+
 require_once($CFG->libdir.'/formslib.php');
 
 /**
@@ -37,6 +39,8 @@ class postform extends moodleform {
     /**
      * Define the form
      * @return void
+     * @throws coding_exception
+     * @throws dml_exception
      */
     protected function definition() {
         global $DB;

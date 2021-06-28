@@ -23,6 +23,7 @@
  */
 
 require(__DIR__ . '/../../../config.php');
+global $CFG, $PAGE, $OUTPUT;
 require_once($CFG->libdir . '/filelib.php');
 
 $download = optional_param('download', false, PARAM_BOOL);
