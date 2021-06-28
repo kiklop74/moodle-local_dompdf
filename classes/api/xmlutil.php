@@ -25,12 +25,12 @@
 namespace local_dompdf\api;
 
 use DOMDocument;
-use DOMElement;
 use DOMNode;
 use DOMXPath;
-use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
+
+global $CFG;
 
 require_once($CFG->libdir . '/filelib.php');
 
@@ -40,7 +40,8 @@ require_once($CFG->libdir . '/filelib.php');
  * @copyright 2019 onwards Darko Miletic
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class xmlutil {
+abstract class xmlutil
+{
 
     /** @var string UTF-8 */
     const UTF8 = 'UTF-8';
@@ -52,7 +53,7 @@ abstract class xmlutil {
      * @param DOMNode $node
      * @return string
      */
-    public static function innerhtml(DOMNode $node) {
+    public static function innerhtml(DOMNode $node): string {
         return implode(
             array_map(
                 [$node->ownerDocument, 'saveHTML'],
@@ -72,7 +73,7 @@ abstract class xmlutil {
      * @param string $decode
      * @return DOMDocument | null
      */
-    public static function loadhtmlfragment($htmlfragment, $decode) {
+    public static function loadhtmlfragment(string $htmlfragment, string $decode): ?DOMDocument {
         $result = null;
         if ($htmlfragment) {
             $doc = new DOMDocument(self::XML1, self::UTF8);
@@ -82,7 +83,8 @@ abstract class xmlutil {
             $doc->recover = true;
             $doc->validateOnParse = false;
             $decoded = $decode ? html_entity_decode($htmlfragment, ENT_QUOTES, self::UTF8) : $htmlfragment;
-            $wraphtml = sprintf('<html lang="en">
+            $wraphtml = sprintf(
+                '<html lang="en">
                         <head>
                           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                           <title>title</title>
@@ -90,7 +92,9 @@ abstract class xmlutil {
                         <body>
                           %s
                         </body>
-                        </html>', $decoded);
+                        </html>',
+                $decoded
+            );
             if (@$doc->loadHTML($wraphtml, LIBXML_NONET)) {
                 $result = $doc;
             }
@@ -106,7 +110,7 @@ abstract class xmlutil {
      * @param DOMDocument $doc
      * @return null|string
      */
-    public static function extractfragment(DOMDocument $doc) {
+    public static function extractfragment(DOMDocument $doc): ?string {
         $result = null;
         $nodel = $doc->getElementsByTagName('body');
         if ($nodel->length) {
@@ -123,27 +127,36 @@ abstract class xmlutil {
      * @param int $contextid
      * @param string $component
      * @return string
-     * @throws \coding_exception
-     * @throws \file_exception
      */
-    public static function recode_images($html, $itemid, $filearea, $contextid, $component) {
+    public static function recode_images(
+        string $html,
+        int $itemid,
+        string $filearea,
+        int $contextid,
+        string $component
+    ): ?string {
         $result = $html;
         $doc = self::loadhtmlfragment($html, false);
         if ($doc === null) {
             return $result;
         }
         $xpath = new DOMXPath($doc);
-        $seed = '@@PLUGINFILE@@'; $empty = ''; $srcattribute = 'src';
+        $seed = '@@PLUGINFILE@@';
+        $empty = '';
+        $srcattribute = 'src';
         $items = $xpath->query(sprintf('//img[@%1$s and starts-with(@%1$s, "%2$s/")]', $srcattribute, $seed));
         if ($items->length > 0) {
             $fs = get_file_storage();
-            /** @var DOMElement[] $items */
-            $items;
             foreach ($items as $item) {
                 $src = str_replace($seed, $empty, $item->getAttribute($srcattribute));
                 $path = pathinfo($src);
                 $imagefile = $fs->get_file(
-                    $contextid, $component, $filearea, $itemid, $path['dirname'], $path['basename']
+                    $contextid,
+                    $component,
+                    $filearea,
+                    $itemid,
+                    $path['dirname'],
+                    $path['basename']
                 );
                 if (($imagefile !== false) and $imagefile->is_valid_image()) {
                     $imagecontent = sprintf(
@@ -160,5 +173,4 @@ abstract class xmlutil {
 
         return $result;
     }
-
 }

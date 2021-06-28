@@ -14,43 +14,45 @@ services:
 env:
   global:
     - DB=mysqli
-    - MOODLE_CI_VER=1
     - IGNORE_PATHS=vendor/composer
     - IGNORE_NAMES=autoload.php
 
 matrix:
  include:
-  - php: "5.6"
-    env: MOODLE_BRANCH=MOODLE_29_STABLE
-  - php: "5.6"
-    env: MOODLE_BRANCH=MOODLE_30_STABLE
-  - php: "5.6"
-    env: MOODLE_BRANCH=MOODLE_31_STABLE
-  - php: "5.6"
-    env: MOODLE_BRANCH=MOODLE_32_STABLE MOODLE_CI_VER=2
-  - php: "7.0"
-    env: MOODLE_BRANCH=MOODLE_33_STABLE MOODLE_CI_VER=2
-  - php: "7.0"
-    env: MOODLE_BRANCH=MOODLE_34_STABLE MOODLE_CI_VER=2
+  - php: "7.1"
+    env: MOODLE_BRANCH=MOODLE_35_STABLE
+  - php: "7.1"
+    env: MOODLE_BRANCH=MOODLE_36_STABLE
+  - php: "7.1"
+    env: MOODLE_BRANCH=MOODLE_37_STABLE
+  - php: "7.1"
+    env: MOODLE_BRANCH=MOODLE_38_STABLE
+  - php: "7.2"
+    env: MOODLE_BRANCH=MOODLE_39_STABLE
+  - php: "7.2"
+    env: MOODLE_BRANCH=MOODLE_310_STABLE
+  - php: "7.3"
+    env: MOODLE_BRANCH=MOODLE_311_STABLE
 
 before_install:
-  - nvm install 8.9
-  - nvm use 8.9
+  - nvm install --no-progress v14.15.0
+  - nvm use v14.15.0
   - cd ../..
   - composer selfupdate
-  - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci ^${MOODLE_CI_VER}
+  - composer create-project -n --no-dev --no-progress --no-scripts --prefer-dist --no-ansi moodlehq/moodle-plugin-ci ci ^3
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
   - moodle-plugin-ci install
 
-# We do not include behat testing for now since there are numerous issues
-# with the tests them selves that need to be resolved before doing that.
 script:
   - moodle-plugin-ci phplint
-  - moodle-plugin-ci phpcpd
   - moodle-plugin-ci phpmd
   - moodle-plugin-ci codechecker
   - moodle-plugin-ci validate
-  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci savepoints ; fi
-  - if [ "$MOODLE_CI_VER" -eq 2 ] ; then moodle-plugin-ci phpdoc ; fi
+  - moodle-plugin-ci savepoints
+  - moodle-plugin-ci mustache
+  - moodle-plugin-ci grunt
+  - moodle-plugin-ci phpdoc
+  - moodle-plugin-ci phpunit
+  - moodle-plugin-ci behat

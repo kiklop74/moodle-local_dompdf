@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Dompdf\\Adapter\\CPDF' => $vendorDir . '/dompdf/dompdf/src/Adapter/CPDF.php',
     'Dompdf\\Adapter\\GD' => $vendorDir . '/dompdf/dompdf/src/Adapter/GD.php',
     'Dompdf\\Adapter\\PDFLib' => $vendorDir . '/dompdf/dompdf/src/Adapter/PDFLib.php',
@@ -14,6 +14,7 @@ return array(
     'Dompdf\\Canvas' => $vendorDir . '/dompdf/dompdf/src/Canvas.php',
     'Dompdf\\CanvasFactory' => $vendorDir . '/dompdf/dompdf/src/CanvasFactory.php',
     'Dompdf\\Cellmap' => $vendorDir . '/dompdf/dompdf/src/Cellmap.php',
+    'Dompdf\\Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
     'Dompdf\\Css\\AttributeTranslator' => $vendorDir . '/dompdf/dompdf/src/Css/AttributeTranslator.php',
     'Dompdf\\Css\\Color' => $vendorDir . '/dompdf/dompdf/src/Css/Color.php',
     'Dompdf\\Css\\Style' => $vendorDir . '/dompdf/dompdf/src/Css/Style.php',
@@ -127,9 +128,9 @@ return array(
     'Sabberworm\\CSS\\Comment\\Comment' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Comment/Comment.php',
     'Sabberworm\\CSS\\Comment\\Commentable' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Comment/Commentable.php',
     'Sabberworm\\CSS\\OutputFormat' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/OutputFormat.php',
-    'Sabberworm\\CSS\\OutputFormatter' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/OutputFormat.php',
     'Sabberworm\\CSS\\Parser' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Parser.php',
     'Sabberworm\\CSS\\Parsing\\OutputException' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Parsing/OutputException.php',
+    'Sabberworm\\CSS\\Parsing\\ParserState' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Parsing/ParserState.php',
     'Sabberworm\\CSS\\Parsing\\SourceException' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Parsing/SourceException.php',
     'Sabberworm\\CSS\\Parsing\\UnexpectedTokenException' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Parsing/UnexpectedTokenException.php',
     'Sabberworm\\CSS\\Property\\AtRule' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Property/AtRule.php',
@@ -145,7 +146,10 @@ return array(
     'Sabberworm\\CSS\\Settings' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Settings.php',
     'Sabberworm\\CSS\\Value\\CSSFunction' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/CSSFunction.php',
     'Sabberworm\\CSS\\Value\\CSSString' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/CSSString.php',
+    'Sabberworm\\CSS\\Value\\CalcFunction' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/CalcFunction.php',
+    'Sabberworm\\CSS\\Value\\CalcRuleValueList' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/CalcRuleValueList.php',
     'Sabberworm\\CSS\\Value\\Color' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/Color.php',
+    'Sabberworm\\CSS\\Value\\LineName' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/LineName.php',
     'Sabberworm\\CSS\\Value\\PrimitiveValue' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/PrimitiveValue.php',
     'Sabberworm\\CSS\\Value\\RuleValueList' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/RuleValueList.php',
     'Sabberworm\\CSS\\Value\\Size' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/Size.php',

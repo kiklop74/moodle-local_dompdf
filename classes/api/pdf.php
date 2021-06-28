@@ -25,9 +25,6 @@
 namespace local_dompdf\api;
 
 use Dompdf\Dompdf;
-use invalid_dataroot_permissions;
-use coding_exception;
-use file_exception;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -44,17 +41,15 @@ abstract class pdf {
      * @return void
      */
     public static function autoload() {
-        require_once(__DIR__.'/../../vendor/autoload.php');
+        require_once(__DIR__ . '/../../vendor/autoload.php');
     }
 
     /**
      * Create new instance
      * @param array|null $options
      * @return Dompdf
-     * @throws invalid_dataroot_permissions
-     * @throws coding_exception
      */
-    public static function createnew(array $options = null) {
+    public static function createnew(array $options = null): Dompdf {
         global $CFG;
         self::autoload();
         $cachedir = make_localcache_directory('dompdf');
@@ -77,7 +72,7 @@ abstract class pdf {
         if (is_array($options)) {
             $opts = array_merge($default, $options);
         }
-        return new \Dompdf\Dompdf($opts);
+        return new Dompdf($opts);
     }
 
     /**
@@ -88,11 +83,14 @@ abstract class pdf {
      * @param int $contextid
      * @param string $component
      * @return string
-     * @throws file_exception
-     * @throws coding_exception
      */
-    public static function file_rewrite_image_urls($html, $itemid, $filearea, $contextid, $component) {
+    public static function file_rewrite_image_urls(
+        string $html,
+        int $itemid,
+        string $filearea,
+        int $contextid,
+        string $component
+    ): string {
         return xmlutil::recode_images($html, $itemid, $filearea, $contextid, $component);
     }
-
 }

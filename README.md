@@ -11,8 +11,9 @@ HTML attributes.
 
 ## Requirements
 
- * Moodle 2.9+
- * MBString extension
+* PHP 7.1+
+* Moodle 3.5+
+* MBString extension
 
 ### Recommendations
 
