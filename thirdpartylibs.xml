@@ -3,28 +3,28 @@
     <library>
         <location>vendor/dompdf/dompdf</location>
         <name>DomPdf</name>
-        <version>v1.0.2</version>
+        <version>v1.2.1</version>
         <license>LGPL</license>
         <licenseversion>2.1</licenseversion>
     </library>
     <library>
         <location>vendor/phenx/php-font-lib</location>
         <name>PHP Font Lib</name>
-        <version>0.5.2</version>
+        <version>0.5.4</version>
         <license>LGPL</license>
         <licenseversion>3.0</licenseversion>
     </library>
     <library>
         <location>vendor/phenx/php-svg-lib</location>
         <name>SVG file parsing and rendering lib</name>
-        <version>v0.3.3</version>
+        <version>v0.4.1</version>
         <license>LGPL</license>
         <licenseversion>3.0</licenseversion>
     </library>
     <library>
         <location>vendor/sabberworm/php-css-parser</location>
         <name>PHP CSS Parser</name>
-        <version>8.3.1</version>
+        <version>8.4.0</version>
         <license>MIT</license>
         <licenseversion></licenseversion>
     </library>
