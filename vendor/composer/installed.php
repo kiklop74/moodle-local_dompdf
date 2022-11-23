@@ -1,60 +1,68 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'f076e1e7458500fd563d369c4ae7babc0e6fd459',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
     ),
-    'reference' => '3c40e7279e74d55f4ea9fb8d136ee658801fc68b',
-    'name' => '__root__',
-  ),
-  'versions' => 
-  array (
-    '__root__' => 
-    array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3c40e7279e74d55f4ea9fb8d136ee658801fc68b',
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'f076e1e7458500fd563d369c4ae7babc0e6fd459',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'dompdf/dompdf' => array(
+            'pretty_version' => 'v2.0.1',
+            'version' => '2.0.1.0',
+            'reference' => 'c5310df0e22c758c85ea5288175fc6cd777bc085',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../dompdf/dompdf',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'masterminds/html5' => array(
+            'pretty_version' => '2.7.6',
+            'version' => '2.7.6.0',
+            'reference' => '897eb517a343a2281f11bc5556d6548db7d93947',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../masterminds/html5',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'phenx/php-font-lib' => array(
+            'pretty_version' => '0.5.4',
+            'version' => '0.5.4.0',
+            'reference' => 'dd448ad1ce34c63d09baccd05415e361300c35b4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phenx/php-font-lib',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'phenx/php-svg-lib' => array(
+            'pretty_version' => '0.5.0',
+            'version' => '0.5.0.0',
+            'reference' => '76876c6cf3080bcb6f249d7d59705108166a6685',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phenx/php-svg-lib',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'sabberworm/php-css-parser' => array(
+            'pretty_version' => '8.4.0',
+            'version' => '8.4.0.0',
+            'reference' => 'e41d2140031d533348b2192a83f02d8dd8a71d30',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../sabberworm/php-css-parser',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
     ),
-    'dompdf/dompdf' => 
-    array (
-      'pretty_version' => 'v1.2.1',
-      'version' => '1.2.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c6dfd9bb8b0040609f04754f729d4cb3016e0575',
-    ),
-    'phenx/php-font-lib' => 
-    array (
-      'pretty_version' => '0.5.4',
-      'version' => '0.5.4.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'dd448ad1ce34c63d09baccd05415e361300c35b4',
-    ),
-    'phenx/php-svg-lib' => 
-    array (
-      'pretty_version' => '0.4.1',
-      'version' => '0.4.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4498b5df7b08e8469f0f8279651ea5de9626ed02',
-    ),
-    'sabberworm/php-css-parser' => 
-    array (
-      'pretty_version' => '8.4.0',
-      'version' => '8.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'e41d2140031d533348b2192a83f02d8dd8a71d30',
-    ),
-  ),
 );

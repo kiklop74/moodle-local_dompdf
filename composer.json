@@ -1,5 +1,5 @@
 {
   "require-dev": {
-    "dompdf/dompdf": "v1.2.1"
+    "dompdf/dompdf": "v2.0.1"
   }
 }
