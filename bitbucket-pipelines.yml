@@ -17,7 +17,7 @@ pipelines:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
           - cd '/var/tmp'
-          - moodle-plugin-ci install
+          - moodle-plugin-ci install --db-host='127.0.0.1'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
@@ -36,7 +36,7 @@ pipelines:
           - export MOODLE_BRANCH='MOODLE_401_STABLE'
           - update-alternatives --set php /usr/bin/php8.0
           - cd '/var/tmp'
-          - moodle-plugin-ci install
+          - moodle-plugin-ci install --db-host='127.0.0.1'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
