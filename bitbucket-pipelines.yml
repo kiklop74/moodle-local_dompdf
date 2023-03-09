@@ -17,7 +17,9 @@ pipelines:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
           - export CI_BUILD_DIR="$BITBUCKET_CLONE_DIR"
-          - moodle-plugin-ci install --db-host='127.0.0.1'
+          - printenv ; pwd
+          - '[ "$(pwd)" != "/var/tmp" ] && cd /var/tmp'
+          - moodle-plugin-ci install -vvv --db-host='127.0.0.1'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
