@@ -9,7 +9,7 @@ definitions:
     mariadb:
       image: mariadb:10
       variables:
-        MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
+        MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
 
 pipelines:
   default:
