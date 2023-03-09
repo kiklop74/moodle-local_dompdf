@@ -1,0 +1,51 @@
+image:
+  name: '271411534863.dkr.ecr.us-east-2.amazonaws.com/moodleusdev:latest'
+  aws:
+    access-key: $AWS_ACCESS_KEY
+    secret-key: $AWS_SECRET_KEY
+
+definitions:
+  services:
+    mariadb:
+      image: mariadb:10
+      variables:
+        MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
+
+pipelines:
+  default:
+    - step:
+        name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
+        script:
+          - cd '/var/tmp'
+          - moodle-plugin-ci install
+          - moodle-plugin-ci phplint
+          - moodle-plugin-ci phpcpd
+          - moodle-plugin-ci phpmd
+          - moodle-plugin-ci codechecker
+          - moodle-plugin-ci validate
+          - moodle-plugin-ci savepoints
+          - moodle-plugin-ci mustache
+          - moodle-plugin-ci grunt
+          - moodle-plugin-ci phpdoc --fail-on-warning
+          - moodle-plugin-ci phpunit
+        services:
+          - mariadb
+    - step:
+        name: 'Moodle 4.1, PHP 8.1 and MariaDB 10'
+        script:
+          - export MOODLE_BRANCH='MOODLE_401_STABLE'
+          - update-alternatives --set php /usr/bin/php8.0
+          - cd '/var/tmp'
+          - moodle-plugin-ci install
+          - moodle-plugin-ci phplint
+          - moodle-plugin-ci phpcpd
+          - moodle-plugin-ci phpmd
+          - moodle-plugin-ci codechecker
+          - moodle-plugin-ci validate
+          - moodle-plugin-ci savepoints
+          - moodle-plugin-ci mustache
+          - moodle-plugin-ci grunt
+          - moodle-plugin-ci phpdoc --fail-on-warning
+          - moodle-plugin-ci phpunit
+        services:
+          - mariadb
