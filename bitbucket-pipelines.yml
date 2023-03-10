@@ -16,8 +16,8 @@ pipelines:
     - step:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
-          - export CI_BUILD_DIR="$BITBUCKET_CLONE_DIR"
-          - cd /var/tmp
+          - printenv ; pwd
+          - '[ "$(pwd)" != "/var/tmp" ] && cd /var/tmp'
           - moodle-plugin-ci install --db-host='127.0.0.1'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
@@ -34,11 +34,10 @@ pipelines:
     - step:
         name: 'Moodle 4.1, PHP 8.1 and MariaDB 10'
         script:
-          - export CI_BUILD_DIR="$BITBUCKET_CLONE_DIR"
-          - export MOODLE_BRANCH='MOODLE_401_STABLE'
-          - update-alternatives --set php /usr/bin/php8.0
-          - cd /var/tmp
-          - moodle-plugin-ci install --db-host='127.0.0.1'
+          - printenv ; pwd
+          - '[ "$(pwd)" != "/var/tmp" ] && cd /var/tmp'
+          - update-alternatives --set php /usr/bin/php8.1
+          - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint || echo ''
           - moodle-plugin-ci phpcpd || echo ''
           - moodle-plugin-ci phpmd || echo ''
