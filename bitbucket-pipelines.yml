@@ -10,13 +10,23 @@ definitions:
       image: mariadb:10
       variables:
         MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
+    mysql:
+      image: mysql:8
+      variables:
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    postgres:
+      image: postgres:13
+      variables:
+        POSTGRES_USER: 'root'
+        POSTGRES_PASSWORD: 'secret'
 
 pipelines:
   default:
     - step:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
-          - cd /var/tmp
+          - mkdir -pv "$BITBUCKET_CLONE_DIR/_workspace" && cd "$BITBUCKET_CLONE_DIR/_workspace"
+          - cp -ru "$BITBUCKET_CLONE_DIR" /tmp/plugin
           - moodle-plugin-ci install --db-host='127.0.0.1' --plugin="$BITBUCKET_CLONE_DIR"
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
@@ -56,3 +66,40 @@ pipelines:
         services:
           - mariadb
           - docker
+    - step:
+        name: 'Moodle 4.1, PHP 8.1 and PostgreSQL 13'
+        script:
+          - update-alternatives --set php /usr/bin/php8.1
+          - cd /var/tmp
+          - moodle-plugin-ci install --db-host='127.0.0.1' --db-user='root' --db-pass='secret'
+            --plugin="$BITBUCKET_CLONE_DIR" --branch='MOODLE_401_STABLE'
+          - moodle-plugin-ci phplint
+          - moodle-plugin-ci phpcpd
+          - moodle-plugin-ci phpmd
+          - moodle-plugin-ci codechecker
+          - moodle-plugin-ci validate
+          - moodle-plugin-ci savepoints
+          - moodle-plugin-ci mustache
+          - moodle-plugin-ci grunt
+          - moodle-plugin-ci phpdoc
+          - moodle-plugin-ci phpunit
+        services:
+          - postgres
+    - step:
+        name: 'Moodle 4.1, PHP 8.1 and MySQL 8'
+        script:
+          - update-alternatives --set php /usr/bin/php8.1
+          - cd /var/tmp
+          - moodle-plugin-ci install --db-host='127.0.0.1' --plugin="$BITBUCKET_CLONE_DIR" --branch='MOODLE_401_STABLE'
+          - moodle-plugin-ci phplint
+          - moodle-plugin-ci phpcpd
+          - moodle-plugin-ci phpmd
+          - moodle-plugin-ci codechecker
+          - moodle-plugin-ci validate
+          - moodle-plugin-ci savepoints
+          - moodle-plugin-ci mustache
+          - moodle-plugin-ci grunt
+          - moodle-plugin-ci phpdoc
+          - moodle-plugin-ci phpunit
+        services:
+          - mysql
