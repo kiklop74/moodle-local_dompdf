@@ -25,7 +25,7 @@ pipelines:
     - step:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
-          - mkdir -pv /tmp/plugin && cp -ru "$BITBUCKET_CLONE_DIR/" /tmp/plugin && export CI_BUILD_DIR='/tmp/plugin'
+          - . preset
           - moodle-plugin-ci install --db-host='127.0.0.1'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
@@ -44,14 +44,11 @@ pipelines:
         caches:
           - docker
         script:
-          - mkdir -pv /tmp/plugin && cp -ru "$BITBUCKET_CLONE_DIR/" /tmp/plugin && export CI_BUILD_DIR='/tmp/plugin'
-          - export MOODLE_BEHAT_WWWROOT="http://$BITBUCKET_DOCKER_HOST_INTERNAL:8000"
-          - export MOODLE_BEHAT_WDHOST="http://$BITBUCKET_DOCKER_HOST_INTERNAL:4444/wd/hub"
-          - update-alternatives --set php /usr/bin/php8.1
-          - cd /var/tmp
+          - . preset
+          - . preset-behat
+          - setphpversion 8.1
           - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
-          - docker run -d -p 4444:4444 --shm-size=1g -v "$BITBUCKET_CLONE_DIR/moodle:$BITBUCKET_CLONE_DIR/moodle" "selenium/standalone-firefox:3" 
-            && { php -S 0.0.0.0:8000 -t "$BITBUCKET_CLONE_DIR/moodle" > /dev/null 2>&1 & } ; sleep 10s ;
+          - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
           - moodle-plugin-ci phpcpd || echo ''
           - moodle-plugin-ci phpmd || echo ''
@@ -69,10 +66,10 @@ pipelines:
     - step:
         name: 'Moodle 4.1, PHP 8.1 and PostgreSQL 13'
         script:
-          - update-alternatives --set php /usr/bin/php8.1
-          - cd /var/tmp
+          - . preset-postgres
+          - setphpversion 8.1
           - moodle-plugin-ci install --db-host='127.0.0.1' --db-user='root' --db-pass='secret'
-            --plugin="$BITBUCKET_CLONE_DIR" --branch='MOODLE_401_STABLE'
+            --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
@@ -88,9 +85,9 @@ pipelines:
     - step:
         name: 'Moodle 4.1, PHP 8.1 and MySQL 8'
         script:
-          - update-alternatives --set php /usr/bin/php8.1
-          - cd /var/tmp
-          - moodle-plugin-ci install --db-host='127.0.0.1' --plugin="$BITBUCKET_CLONE_DIR" --branch='MOODLE_401_STABLE'
+          - . preset-mysql
+          - setphpversion 8.1
+          - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
