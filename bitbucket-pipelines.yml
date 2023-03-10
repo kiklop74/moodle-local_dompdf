@@ -26,6 +26,7 @@ pipelines:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
           - . preset
+          - moodle-plugin-ci add-plugin --branch='v3.0.4' blindsidenetworks/moodle-mod_bigbluebuttonbn
           - moodle-plugin-ci install --db-host='127.0.0.1'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
