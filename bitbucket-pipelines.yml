@@ -26,9 +26,9 @@ pipelines:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
           - . preset
-          - moodle-plugin-ci add-plugin --branch='v3.0.4' blindsidenetworks/moodle-mod_bigbluebuttonbn
+          - moodle-plugin-ci add-plugin --branch='3.9.0' jleyva/moodle-block_configurablereports
           - set-sshkey "$REPOKEY"
-          - moodle-plugin-ci install --db-host='127.0.0.1' --repo='git@github.com:moodleworkplace/workplace_mylearningconsultants.git' --branch='WORKPLACE_401_LATEST'
+          - moodle-plugin-ci install --db-host='127.0.0.1' --repo="$REPOSITORY" --branch='WORKPLACE_401_LATEST'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
