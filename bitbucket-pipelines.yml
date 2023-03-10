@@ -25,9 +25,8 @@ pipelines:
     - step:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
         script:
-          - mkdir -pv "$BITBUCKET_CLONE_DIR/_workspace" && cd "$BITBUCKET_CLONE_DIR/_workspace"
-          - cp -ru "$BITBUCKET_CLONE_DIR" /tmp/plugin
-          - moodle-plugin-ci install --db-host='127.0.0.1' --plugin="$BITBUCKET_CLONE_DIR"
+          - mkdir -pv /tmp/plugin && cp -ru "$BITBUCKET_CLONE_DIR/" /tmp/plugin && export CI_BUILD_DIR='/tmp/plugin'
+          - moodle-plugin-ci install --db-host='127.0.0.1'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
@@ -45,13 +44,14 @@ pipelines:
         caches:
           - docker
         script:
+          - mkdir -pv /tmp/plugin && cp -ru "$BITBUCKET_CLONE_DIR/" /tmp/plugin && export CI_BUILD_DIR='/tmp/plugin'
           - export MOODLE_BEHAT_WWWROOT="http://$BITBUCKET_DOCKER_HOST_INTERNAL:8000"
           - export MOODLE_BEHAT_WDHOST="http://$BITBUCKET_DOCKER_HOST_INTERNAL:4444/wd/hub"
           - update-alternatives --set php /usr/bin/php8.1
           - cd /var/tmp
-          - moodle-plugin-ci install --db-host='127.0.0.1' --plugin="$BITBUCKET_CLONE_DIR" --branch='MOODLE_401_STABLE'
-          - docker run -d -p 4444:4444 --shm-size=1g -v "/var/tmp/moodle:/var/tmp/moodle" "selenium/standalone-firefox:3" 
-            && { php -S 0.0.0.0:8000 -t "/var/tmp/moodle" > /dev/null 2>&1 & } ; sleep 10s ;
+          - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
+          - docker run -d -p 4444:4444 --shm-size=1g -v "$BITBUCKET_CLONE_DIR/moodle:$BITBUCKET_CLONE_DIR/moodle" "selenium/standalone-firefox:3" 
+            && { php -S 0.0.0.0:8000 -t "$BITBUCKET_CLONE_DIR/moodle" > /dev/null 2>&1 & } ; sleep 10s ;
           - moodle-plugin-ci phplint || echo ''
           - moodle-plugin-ci phpcpd || echo ''
           - moodle-plugin-ci phpmd || echo ''
