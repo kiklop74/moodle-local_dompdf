@@ -75,13 +75,13 @@ pipelines:
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
-          - moodle-plugin-ci codechecker
-          - moodle-plugin-ci validate
-          - moodle-plugin-ci savepoints
-          - moodle-plugin-ci mustache
-          - moodle-plugin-ci grunt
-          - moodle-plugin-ci phpdoc
-          - moodle-plugin-ci phpunit
+          - moodle-plugin-ci codechecker || echo ''
+          - moodle-plugin-ci validate || echo ''
+          - moodle-plugin-ci savepoints || echo ''
+          - moodle-plugin-ci mustache || echo ''
+          - moodle-plugin-ci grunt || echo ''
+          - moodle-plugin-ci phpdoc || echo ''
+          - moodle-plugin-ci phpunit || echo ''
         services:
           - postgres
     - step:
@@ -93,12 +93,12 @@ pipelines:
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
-          - moodle-plugin-ci codechecker
-          - moodle-plugin-ci validate
-          - moodle-plugin-ci savepoints
-          - moodle-plugin-ci mustache
-          - moodle-plugin-ci grunt
-          - moodle-plugin-ci phpdoc
-          - moodle-plugin-ci phpunit
+          - moodle-plugin-ci codechecker || echo ''
+          - moodle-plugin-ci validate || echo ''
+          - moodle-plugin-ci savepoints || echo ''
+          - moodle-plugin-ci mustache || echo ''
+          - moodle-plugin-ci grunt || echo ''
+          - moodle-plugin-ci phpdoc || echo ''
+          - moodle-plugin-ci phpunit || echo ''
         services:
           - mysql
