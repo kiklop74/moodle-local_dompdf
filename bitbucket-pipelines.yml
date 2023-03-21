@@ -19,13 +19,17 @@ definitions:
       variables:
         POSTGRES_USER: 'root'
         POSTGRES_PASSWORD: 'secret'
+  caches:
+    npm: $HOME/.npm
 
 pipelines:
   default:
     - step:
         name: 'Moodle 3.11, PHP 7.4 and MariaDB 10'
+        caches:
+          - npm
+          - composer
         script:
-          - . preset
           - moodle-plugin-ci add-plugin --branch='3.9.0' jleyva/moodle-block_configurablereports
           - set-sshkey "$REPOKEY"
           - moodle-plugin-ci install --db-host='127.0.0.1' --repo="$REPOSITORY" --branch='WORKPLACE_401_LATEST'
@@ -45,9 +49,9 @@ pipelines:
         name: 'Moodle 4.1, PHP 8.1 and MariaDB 10'
         caches:
           - docker
+          - npm
+          - composer
         script:
-          - . preset
-          - . preset-behat
           - setphpversion 8.1
           - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
           - preset-start-behat
@@ -67,10 +71,12 @@ pipelines:
           - docker
     - step:
         name: 'Moodle 4.1, PHP 8.1 and PostgreSQL 13'
+        caches:
+          - npm
+          - composer
         script:
-          - . preset-postgres
           - setphpversion 8.1
-          - moodle-plugin-ci install --db-host='127.0.0.1' --db-user='root' --db-pass='secret'
+          - moodle-plugin-ci install --db-type='pgsql' --db-host='127.0.0.1' --db-user='root' --db-pass='secret'
             --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
@@ -86,10 +92,12 @@ pipelines:
           - postgres
     - step:
         name: 'Moodle 4.1, PHP 8.1 and MySQL 5.7'
+        caches:
+          - npm
+          - composer
         script:
-          - . preset-mysql
           - setphpversion 8.1
-          - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
+          - moodle-plugin-ci install --db-type='mysqli' --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
