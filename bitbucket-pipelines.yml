@@ -34,7 +34,7 @@ pipelines:
           - setphpversion 8.1
           - composer create-project -n --no-dev --no-progress --no-ansi --prefer-dist
             moodlehq/moodle-plugin-ci /opt/moodle-plugin-ci-dev dev-master
-          - export PATH="/opt/moodle-plugin-ci-dev/bin:/opt/moodle-plugin-ci-dev/vendor/bin:$PATHBASE"
+          - export PATH="/opt/moodle-plugin-ci-dev/bin:/opt/moodle-plugin-ci-dev/vendor/bin:$PATH"
           #- composer config --working-dir='/opt/moodle-plugin-ci' 'platform.php' '8.0.2'
           #- composer require --working-dir='/opt/moodle-plugin-ci' -W
           #  'symfony/console:^v6.0.7' 'sebastian/phpcpd:^v6.0' 'stecman/symfony-console-completion:^0.12'
