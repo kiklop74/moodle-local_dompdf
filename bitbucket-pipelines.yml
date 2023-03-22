@@ -53,6 +53,8 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
+          - composer self-update
+          - composer global update
           - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
           - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
