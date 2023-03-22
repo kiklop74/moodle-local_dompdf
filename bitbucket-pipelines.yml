@@ -31,7 +31,9 @@ pipelines:
           - npm
           - composer
         script:
+          - printenv
           - setphpversion 8.1
+          - printenv
           - moodle-plugin-ci install --branch='MOODLE_401_STABLE'
           - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
