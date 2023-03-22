@@ -32,7 +32,8 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer require --working-dir='/opt/moodle-plugin-ci' -W 'symfony/console:^v6.0.7'
+          - composer require --working-dir='/opt/moodle-plugin-ci' -W
+            'symfony/console:^v6.0.7' 'sebastian/phpcpd:^v5.0' 'stecman/symfony-console-completion:^0.12'
           - moodle-plugin-ci install --branch='MOODLE_401_STABLE'
           - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
