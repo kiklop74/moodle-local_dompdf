@@ -31,8 +31,7 @@ pipelines:
           - npm
           - composer
         script:
-          - /usr/bin/update-alternatives --set 'php' "/usr/bin/php8.1"
-          - export PATH="/opt/moodle-plugin-ci-dev/bin:/opt/moodle-plugin-ci-dev/vendor/bin:$PATH"
+          - setphpversion 8.1
           - moodle-plugin-ci install --branch='MOODLE_401_STABLE'
           - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
