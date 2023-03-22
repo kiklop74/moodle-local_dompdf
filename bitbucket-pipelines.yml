@@ -53,7 +53,7 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer require --working-dir='/opt/moodle-plugin-ci' 'symfony/console' '^6.07'
+          - composer require --working-dir='/opt/moodle-plugin-ci' 'symfony/console' '^v6.0.7'
           - moodle-plugin-ci install --branch='MOODLE_401_STABLE'
           - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
@@ -77,7 +77,7 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer require --working-dir="/opt/moodle-plugin-ci" "symfony/console" "^6.07"
+          - composer require --working-dir='/opt/moodle-plugin-ci' 'symfony/console' '^v6.0.7'
           - moodle-plugin-ci install --db-type='pgsql' --db-user='root' --db-pass='secret'
             --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint
@@ -99,7 +99,7 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer require --working-dir="/opt/moodle-plugin-ci" "symfony/console" "^6.07"
+          - composer require --working-dir='/opt/moodle-plugin-ci' 'symfony/console' '^v6.0.7'
           - moodle-plugin-ci install --db-type='mysqli' --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
