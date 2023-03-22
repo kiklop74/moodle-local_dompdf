@@ -53,9 +53,8 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer update --working-dir="/opt/moodle-plugin-ci" -vvv
+          - composer require --working-dir='/opt/moodle-plugin-ci' 'symfony/console' '^6.07'
           - moodle-plugin-ci install --branch='MOODLE_401_STABLE'
-          - composer update --working-dir="$BITBUCKET_CLONE_DIR/moodle" -vvv
           - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
           - moodle-plugin-ci phpcpd || echo ''
@@ -78,10 +77,9 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer update --working-dir="/opt/moodle-plugin-ci" -vvv
+          - composer require --working-dir="/opt/moodle-plugin-ci" "symfony/console" "^6.07"
           - moodle-plugin-ci install --db-type='pgsql' --db-user='root' --db-pass='secret'
             --branch='MOODLE_401_STABLE'
-          - composer update --working-dir="$BITBUCKET_CLONE_DIR/moodle" -vvv
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
@@ -101,9 +99,8 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer update --working-dir="/opt/moodle-plugin-ci" -vvv
+          - composer require --working-dir="/opt/moodle-plugin-ci" "symfony/console" "^6.07"
           - moodle-plugin-ci install --db-type='mysqli' --branch='MOODLE_401_STABLE'
-          - composer update --working-dir="$BITBUCKET_CLONE_DIR/moodle" -vvv
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
