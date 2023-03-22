@@ -32,7 +32,7 @@ pipelines:
         script:
           - moodle-plugin-ci add-plugin --branch='3.9.0' jleyva/moodle-block_configurablereports
           - set-sshkey "$REPOKEY"
-          - moodle-plugin-ci install --db-host='127.0.0.1' --repo="$REPOSITORY" --branch='WORKPLACE_401_LATEST'
+          - moodle-plugin-ci install --repo="$REPOSITORY" --branch='WORKPLACE_401_LATEST'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
@@ -53,9 +53,8 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - composer self-update
-          - composer global update
-          - moodle-plugin-ci install --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
+          - moodle-plugin-ci install --branch='MOODLE_401_STABLE'
+          - composer update --working-dir="$BITBUCKET_CLONE_DIR/moodle" -vvv
           - preset-start-behat
           - moodle-plugin-ci phplint || echo ''
           - moodle-plugin-ci phpcpd || echo ''
@@ -78,8 +77,9 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - moodle-plugin-ci install --db-type='pgsql' --db-host='127.0.0.1' --db-user='root' --db-pass='secret'
+          - moodle-plugin-ci install --db-type='pgsql' --db-user='root' --db-pass='secret'
             --branch='MOODLE_401_STABLE'
+          - composer update --working-dir="$BITBUCKET_CLONE_DIR/moodle" -vvv
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
@@ -99,7 +99,8 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - moodle-plugin-ci install --db-type='mysqli' --db-host='127.0.0.1' --branch='MOODLE_401_STABLE'
+          - moodle-plugin-ci install --db-type='mysqli' --branch='MOODLE_401_STABLE'
+          - composer update --working-dir="$BITBUCKET_CLONE_DIR/moodle" -vvv
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
