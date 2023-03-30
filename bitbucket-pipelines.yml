@@ -7,18 +7,18 @@ image:
 definitions:
   services:
     mariadb:
-      image: mariadb:10
+      image: 'mariadb:10'
       variables:
         MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
     mysql:
-      image: mysql:5.7
+      image: 'mysql:5.7'
       variables:
         MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     postgres:
-      image: postgres:13
+      image: 'postgres:13'
       variables:
-        POSTGRES_USER: 'root'
-        POSTGRES_PASSWORD: 'secret'
+        POSTGRES_USER: 'postgres'
+        POSTGRES_HOST_AUTH_METHOD: 'trust'
   caches:
     npm: $HOME/.npm
 
@@ -55,8 +55,7 @@ pipelines:
           - composer
         script:
           - setphpversion 8.1
-          - moodle-plugin-ci install --db-type='pgsql' --db-user='root' --db-pass='secret'
-            --branch='MOODLE_401_STABLE'
+          - moodle-plugin-ci install --db-type='pgsql' --branch='MOODLE_401_STABLE'
           - moodle-plugin-ci phplint
           - moodle-plugin-ci phpcpd
           - moodle-plugin-ci phpmd
