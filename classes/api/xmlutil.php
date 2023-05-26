@@ -149,6 +149,7 @@ abstract class xmlutil
             $fs = get_file_storage();
             foreach ($items as $item) {
                 $src = str_replace($seed, $empty, $item->getAttribute($srcattribute));
+                $src= parse_url($src)['path'];
                 $path = pathinfo($src);
                 $imagefile = $fs->get_file(
                     $contextid,
