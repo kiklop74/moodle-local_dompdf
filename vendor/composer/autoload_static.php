@@ -24,6 +24,10 @@ class ComposerStaticInit7b33fa009bbf0ae01927ebbf9d07e8af
         array (
             'Dompdf\\' => 7,
         ),
+        'C' => 
+        array (
+            'Composer\\Installers\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -46,6 +50,10 @@ class ComposerStaticInit7b33fa009bbf0ae01927ebbf9d07e8af
         'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
     );
 

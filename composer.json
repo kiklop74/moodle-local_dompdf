@@ -4,17 +4,22 @@
   "description": "DomPDF library for Moodle",
   "type": "moodle-local",
   "require": {
-    "php": "^7.1.0||^8.0",
+    "php": "^7.2||^8.0",
     "ext-mbstring": "*",
     "ext-gd": "*",
     "ext-dom": "*",
     "composer/installers": "^2.0"
   },
   "require-dev": {
-    "dompdf/dompdf": "v2.0.1"
+    "dompdf/dompdf": "v2.0.3"
   },
   "suggest": {
     "ext-imagick": "Image processing optimization.",
     "ext-gmagick": "Image processing optimization."
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
   }
 }
