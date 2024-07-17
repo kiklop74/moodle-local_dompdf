@@ -11,7 +11,7 @@
     "composer/installers": "^2.0"
   },
   "require-dev": {
-    "dompdf/dompdf": "v2.0.3"
+    "dompdf/dompdf": "v3.0.0"
   },
   "suggest": {
     "ext-imagick": "Image processing optimization.",

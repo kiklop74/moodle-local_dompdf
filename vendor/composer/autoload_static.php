@@ -33,7 +33,7 @@ class ComposerStaticInit7b33fa009bbf0ae01927ebbf9d07e8af
     public static $prefixDirsPsr4 = array (
         'Svg\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
+            0 => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg',
         ),
         'Sabberworm\\CSS\\' => 
         array (
@@ -45,7 +45,7 @@ class ComposerStaticInit7b33fa009bbf0ae01927ebbf9d07e8af
         ),
         'FontLib\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+            0 => __DIR__ . '/..' . '/dompdf/php-font-lib/src/FontLib',
         ),
         'Dompdf\\' => 
         array (

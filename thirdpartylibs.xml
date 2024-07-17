@@ -3,42 +3,42 @@
     <library>
         <location>vendor/dompdf/dompdf</location>
         <name>DomPdf</name>
-        <version>v2.0.3</version>
+        <version>v3.0.0</version>
         <license>LGPL</license>
         <licenseversion>2.1</licenseversion>
     </library>
     <library>
         <location>vendor/phenx/php-font-lib</location>
         <name>PHP Font Lib</name>
-        <version>0.5.4</version>
+        <version>1.0.0</version>
         <license>LGPL</license>
         <licenseversion>3.0</licenseversion>
     </library>
     <library>
         <location>vendor/phenx/php-svg-lib</location>
         <name>SVG file parsing and rendering lib</name>
-        <version>v0.5.0</version>
+        <version>1.0.0</version>
         <license>LGPL</license>
         <licenseversion>3.0</licenseversion>
     </library>
     <library>
         <location>vendor/sabberworm/php-css-parser</location>
         <name>PHP CSS Parser</name>
-        <version>8.4.0</version>
+        <version>v8.6.0</version>
         <license>MIT</license>
         <licenseversion></licenseversion>
     </library>
     <library>
         <location>vendor/masterminds/html5</location>
         <name>An HTML5 parser and serializer</name>
-        <version>2.8.0</version>
+        <version>2.9.0</version>
         <license>MIT</license>
         <licenseversion></licenseversion>
     </library>
     <library>
         <location>vendor/composer/installers</location>
         <name>A multi-framework Composer library installer</name>
-        <version>v2.2.0</version>
+        <version>v2.3.0</version>
         <license>MIT</license>
         <licenseversion></licenseversion>
     </library>

@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021062801;
+$plugin->version   = 2021062802;
 $plugin->requires  = 2018051700; // Moodle 3.5 .
 $plugin->component = 'local_dompdf';
-$plugin->release   = '1.3';
+$plugin->release   = '1.4';
 $plugin->maturity  = MATURITY_STABLE;
